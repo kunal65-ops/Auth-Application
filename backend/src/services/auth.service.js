@@ -2,12 +2,14 @@ const User = require('../models/user.model');
 const ApiError = require('../utils/ApiError');
 const { generateAccessToken, generateRefreshToken, verifyRefreshToken } = require('../utils/token.util');
 class AuthService {
-  async registerUser({ email, password }) {
+  async registerUser({ name, dob, email, password }) {
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       throw new ApiError(400, 'User with this email already exists');
     }
     const user = new User({
+      name,
+      dob,
       email,
       password
     });

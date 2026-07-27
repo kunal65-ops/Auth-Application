@@ -1,6 +1,17 @@
 const { body } = require('express-validator');
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_\-+=\[\]{}|;:',.<>/]).{8,50}$/;
 const signupValidator = [
+  body('name')
+    .trim()
+    .notEmpty()
+    .withMessage('Name is required')
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Name must be between 2 and 50 characters'),
+  body('dob')
+    .notEmpty()
+    .withMessage('Date of birth is required')
+    .isISO8601()
+    .withMessage('Please provide a valid date of birth'),
   body('email')
     .trim()
     .notEmpty()
