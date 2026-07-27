@@ -36,9 +36,10 @@ axiosInstance.interceptors.response.use(
       !originalRequest.url.includes('/auth/signup')
     ) {
       originalRequest._retry = true;
+      const refreshURL = `${API_BASE_URL}/auth/refresh`.replace('/api/api/', '/api/');
       try {
         const response = await axios.post(
-          `${API_BASE_URL}/auth/refresh`,
+          refreshURL,
           {},
           { withCredentials: true }
         );

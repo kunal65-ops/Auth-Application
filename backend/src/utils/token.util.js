@@ -34,8 +34,8 @@ const getRefreshTokenCookieOptions = () => {
   return {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000 
+    sameSite: isProduction ? 'none' : 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000
   };
 };
 module.exports = {
