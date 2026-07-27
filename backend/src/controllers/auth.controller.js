@@ -3,8 +3,10 @@ const authService = require('../services/auth.service');
 const ApiResponse = require('../utils/ApiResponse');
 const { getRefreshTokenCookieOptions } = require('../utils/token.util');
 const signup = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { name, dob, email, password } = req.body;
   const { user, accessToken, refreshToken } = await authService.registerUser({
+    name,
+    dob,
     email,
     password
   });
